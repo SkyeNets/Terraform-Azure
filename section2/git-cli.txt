@@ -1,0 +1,5 @@
+#Set your username:
+git config --global user.name "Roger Taylor"
+
+#Set your email address:
+git config --global user.email "roger@skye-nets.com"

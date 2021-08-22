@@ -1,0 +1,20 @@
+# We strongly recommend using the required_providers block to set the
+# Azure Provider source and version being used
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.46.0"
+    }
+  }
+}
+
+# Please use terraform v12.29 to start with for all labs, I will use terraform v13 and v14 from lab 7.5 onwards
+provider "azurerm" {
+  #  version = "= 2.18"
+  features {}
+  # tenant_id = "641ce32b-a716-4d3c-b4ce-6b915e000714"
+  # 6edde200-7e91-4ac9-acb9-00fe59787343
+  #tenant_id = "6edde200-7e91-4ac9-acb9-00fe59787343"
+
+}
