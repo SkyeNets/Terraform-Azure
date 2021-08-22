@@ -4,6 +4,9 @@
 
 terraform {
   backend "azurerm" {}
-
+  resource_group_name  = "skyelab-env-rg"
+  storage_account_name = "skyeremotesa02"
+  container_name       = "tfstate"
+  key                  = "lab93.tfstate"
 }
 
