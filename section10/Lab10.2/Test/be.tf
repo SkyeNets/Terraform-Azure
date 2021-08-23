@@ -27,8 +27,6 @@ module "be-vnet" {
 }
 
 
-
-
 module "web-vm" {
   source         = "../../../modules/compute"
   rg             = azurerm_resource_group.be-rg.name
