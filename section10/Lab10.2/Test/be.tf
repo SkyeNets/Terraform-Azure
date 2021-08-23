@@ -28,25 +28,9 @@ module "be-vnet" {
 
 
 
-/*
 
-resource "azurerm_virtual_network" "be-rg" {
-  name                = var.web-vnet-name
-  address_space       = ["10.0.2.0/23"]
-  location            = azurerm_resource_group.be-rg.location
-  resource_group_name = azurerm_resource_group.be-rg.name
-}
-
-resource "azurerm_subnet" "be-rg" {
-  name                 = var.web-sub-name
-  resource_group_name  = azurerm_resource_group.be-rg.name
-  virtual_network_name = azurerm_virtual_network.be-rg.name
-  address_prefixes     = ["10.0.2.0/24"]
-}
-
-*/
 module "web-vm" {
-  source         = "../../modules/compute"
+  source         = "../../../modules/compute"
   rg             = azurerm_resource_group.be-rg.name
   location       = azurerm_resource_group.be-rg.location
   subnet_id      = module.be-vnet.vnet_subnets[0]
