@@ -9,14 +9,16 @@ resource "azurerm_resource_group" "jbox-rg" {
   location = var.location-name
 }
 
+
 module "jbox-vm" {
-  source         = "../../../modules/compute"
+  source         = "../../modules/compute"
   rg             = azurerm_resource_group.jbox-rg.name
   location       = azurerm_resource_group.jbox-rg.location
   subnet_id      = module.fe-vnet.vnet_subnets[1]
   vm-name        = "${var.env}-Jbox"
   admin_password = data.azurerm_key_vault_secret.skye-vault.value
 }
+
 
 resource "azurerm_network_security_rule" "jbox-rg" {
   name                        = "rdp"
@@ -31,6 +33,7 @@ resource "azurerm_network_security_rule" "jbox-rg" {
   resource_group_name         = azurerm_resource_group.jbox-rg.name
   network_security_group_name = module.jbox-vm.nsg_name
 }
+
 
 resource "azurerm_network_interface_security_group_association" "jbox-rg" {
   network_interface_id      = module.jbox-vm.nic_id

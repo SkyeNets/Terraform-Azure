@@ -4,5 +4,6 @@
 resource_group_name  = "skyelab-env-rg"
 storage_account_name = "skyeremotesa02"
 container_name       = "tfstate"
-key                  = "Dir-Test-Lab10.2.tfstate"
+key                  = "test-Lab10.2.tfstate"
+
 

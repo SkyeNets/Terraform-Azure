@@ -9,13 +9,13 @@ resource "azurerm_virtual_network_peering" "fe-be" {
 }
 
 
-
 resource "azurerm_virtual_network_peering" "be-fe" {
   name                      = "be-fe"
   resource_group_name       = azurerm_resource_group.be-rg.name
   virtual_network_name      = module.be-vnet.vnet_name
   remote_virtual_network_id = module.fe-vnet.vnet_id
 }
+
 
 resource "azurerm_network_security_rule" "fe-rg" {
   name                        = "rdp"
@@ -30,6 +30,7 @@ resource "azurerm_network_security_rule" "fe-rg" {
   resource_group_name         = azurerm_resource_group.be-rg.name
   network_security_group_name = module.web-vm.nsg_name
 }
+
 
 resource "azurerm_firewall_nat_rule_collection" "fe-rg" {
   name                = "nat01"

@@ -9,6 +9,7 @@ resource "azurerm_resource_group" "fe-rg" {
   location = var.location-name
 }
 
+
 module "fe-vnet" {
   source              = "Azure/vnet/azurerm"
   vnet_name           = "${var.env}-Fe-vnet"
@@ -22,8 +23,6 @@ module "fe-vnet" {
 }
 
 
-
-
 resource "azurerm_public_ip" "fe-rg" {
   name                = "${var.env}-Pub-ip01"
   location            = azurerm_resource_group.fe-rg.location
@@ -31,6 +30,7 @@ resource "azurerm_public_ip" "fe-rg" {
   allocation_method   = "Static"
   sku                 = "Standard"
 }
+
 
 resource "azurerm_firewall" "fe-rg" {
   name                = "${var.env}-FW-01"
@@ -42,3 +42,4 @@ resource "azurerm_firewall" "fe-rg" {
     public_ip_address_id = azurerm_public_ip.fe-rg.id
   }
 }
+

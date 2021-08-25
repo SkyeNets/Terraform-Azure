@@ -13,6 +13,7 @@ resource "azurerm_resource_group" "be-rg" {
   location = var.location-name
 }
 
+
 module "be-vnet" {
   source              = "Azure/vnet/azurerm"
   vnet_name           = "${var.env}-Web-vnet"
@@ -27,14 +28,16 @@ module "be-vnet" {
 }
 
 
+
 module "web-vm" {
-  source         = "../../../modules/compute"
+  source         = "../../modules/compute"
   rg             = azurerm_resource_group.be-rg.name
   location       = azurerm_resource_group.be-rg.location
   subnet_id      = module.be-vnet.vnet_subnets[0]
   vm-name        = "${var.env}-Web"
   admin_password = data.azurerm_key_vault_secret.skye-vault.value
 }
+
 
 resource "azurerm_network_security_rule" "be-rg" {
   name                        = "web"
@@ -50,10 +53,12 @@ resource "azurerm_network_security_rule" "be-rg" {
   network_security_group_name = module.web-vm.nsg_name
 }
 
+
 resource "azurerm_network_interface_security_group_association" "be-rg" {
   network_interface_id      = module.web-vm.nic_id
   network_security_group_id = module.web-vm.nsg_id
 }
+
 
 resource "azurerm_virtual_machine_extension" "be-rg" {
   name                 = "iis-extension"
