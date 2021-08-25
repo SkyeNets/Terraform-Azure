@@ -29,7 +29,7 @@ module "be-vnet" {
 
 
 module "web-vm" {
-  source         = "../../modules/compute"
+  source         = "../../../modules/compute"
   rg             = azurerm_resource_group.be-rg.name
   location       = azurerm_resource_group.be-rg.location
   subnet_id      = module.be-vnet.vnet_subnets[0]
