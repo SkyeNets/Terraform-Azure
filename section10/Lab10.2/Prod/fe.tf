@@ -23,7 +23,6 @@ module "fe-vnet" {
 }
 
 
-
 resource "azurerm_public_ip" "fe-rg" {
   name                = "${var.env}-Pub-ip01"
   location            = azurerm_resource_group.fe-rg.location
@@ -43,3 +42,4 @@ resource "azurerm_firewall" "fe-rg" {
     public_ip_address_id = azurerm_public_ip.fe-rg.id
   }
 }
+
